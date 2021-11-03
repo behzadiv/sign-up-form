@@ -1,0 +1,14 @@
+{
+  "users": [
+    {
+      
+      "id": 1,
+      "name": "behzad",
+      "email": "saeedi@gmail.com",
+      "phoneNumber": "09128427710",
+      "password":"Behzad@123",
+      "passwordConfirmation":"Behzad@123",
+      "gender":"0"
+    }
+  ]
+}

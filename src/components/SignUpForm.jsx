@@ -1,7 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "../App.css";
-import { FormikConsumer, useFormik } from "formik";
+import { useFormik } from "formik";
 import * as Yup from "yup";
+import axios from "axios";
+
 const initialValues = {
   name: "",
   email: "",
@@ -31,17 +33,26 @@ const validationSchema = Yup.object({
   ),
   gender:Yup.string().required("Gender must be selected")
 });
+
 const SignUpForm = () => {
+  const[formData,setFormData]=useState(null)
   const onSubmit = (values) => {
     ///post data
   };
+  useEffect(()=>{
+    axios.get("http://localhost:3002/users/1")
+    .then(res=>  setFormData(res.data))
+    .catch()
+   
+  },[])
   const formik = useFormik({
-    initialValues,
+    initialValues:formData || initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
+    enableReinitialize:true,
   });
-  console.log(formik.values);
+  //console.log(formik.values);
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
