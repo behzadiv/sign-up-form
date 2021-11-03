@@ -1,19 +1,18 @@
 import { useState } from "react";
 import "../App.css";
 import { FormikConsumer, useFormik } from "formik";
-
+import * as Yup from "yup"
 const initialValues ={
      name:"",
      email:"",
      password:""
 }
-const validate=(values)=>{
-    let errors = {}
-    if(!values.name){errors.name = "Name is required"}
-    if(!values.email){errors.email = "Email is required"}
-    if(!values.password){errors.password = "Password is required"}
-    return errors
-}
+// 
+const validationSchema = Yup.object({
+    name:Yup.string().required("Name is Required"),
+    email:Yup.string().email("Invalid Email").required("Email is Required"),
+    password:Yup.string().required("Password is Required")
+})
 const SignUpForm = () => {
   const onSubmit =(values) =>{
       ///post data 
@@ -21,7 +20,7 @@ const SignUpForm = () => {
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validate
+    validationSchema
   });
   console.log("viseted fields",formik.touched);
   return (
