@@ -1,85 +1,129 @@
 import { useState } from "react";
 import "../App.css";
 import { FormikConsumer, useFormik } from "formik";
-import * as Yup from "yup"
-const initialValues ={
-     name:"",
-     email:"",
-     phoneNumber:"",
-     password:"",
-     passwordConfirmation:""
-}
-// 
+import * as Yup from "yup";
+const initialValues = {
+  name: "",
+  email: "",
+  phoneNumber: "",
+  password: "",
+  passwordConfirmation: "",
+  gender:"0"
+};
+//
 const validationSchema = Yup.object({
-    name:Yup.string().required("Name is Required"),
-    email:Yup.string().email("Invalid Email").required("Email is Required"),
-    phoneNumber:Yup.string().required("Phone Number is Required ").matches(/^[0-9]{11}$/,"Invalid Phone Number"),
-    password:Yup.string().required("Password is Required").matches(
+  name: Yup.string()
+    .required("Name is Required")
+    .min(6, "Enter at least 6 char"),
+  email: Yup.string().email("Invalid Email").required("Email is Required"),
+  phoneNumber: Yup.string()
+    .required("Phone Number is Required ")
+    .matches(/^[0-9]{11}$/, "Invalid Phone Number"),
+  password: Yup.string()
+    .required("Password is Required")
+    .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
-      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character")
-    ,
-    passwordConfirmation:Yup.string()
-    .oneOf([Yup.ref('password'), null], 'Passwords must match')
-
-})
+      "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
+    ),
+  passwordConfirmation: Yup.string().oneOf(
+    [Yup.ref("password"), null],
+    "Passwords must match"
+  ),
+  gender:Yup.string().required("Gender must be selected")
+});
 const SignUpForm = () => {
-  const onSubmit =(values) =>{
-      ///post data 
-  }
+  const onSubmit = (values) => {
+    ///post data
+  };
   const formik = useFormik({
     initialValues,
     onSubmit,
-    validationSchema
+    validationSchema,
+    validateOnMount: true,
   });
-  console.log("viseted fields",formik.touched);
+  console.log(formik.values);
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
-        <label>Name</label>
-        <input
-          type="text"
-          name="name"
-          {...formik.getFieldProps("name")}
-        />
-        {formik.errors.name && formik.touched.name && <div className="error">{formik.errors.name}</div>}
-        </div>
-      <div>
-        <label>Email</label>
-        <input
-          type="text"
-          name="email"
-         {...formik.getFieldProps("email")}
-        />
-        {formik.errors.email && formik.touched.email && <div className="error">{formik.errors.email}</div>}      
+        <label htmlFor="name">Name</label>
+        <input id="name" type="text" name="name" {...formik.getFieldProps("name")} />
+        {formik.errors.name && formik.touched.name && (
+          <div className="error">{formik.errors.name}</div>
+        )}
       </div>
       <div>
-        <label>Phone Number</label>
+        <label htmlFor="email">Email</label>
+        <input id="email" type="text" name="email" {...formik.getFieldProps("email")} />
+        {formik.errors.email && formik.touched.email && (
+          <div className="error">{formik.errors.email}</div>
+        )}
+      </div>
+      <div>
+        <label htmlFor="phonNumber">Phone Number</label>
         <input
-          type="text"
+        id="phonNumber"
+          type="email"
           name="phoneNumber"
-         {...formik.getFieldProps("phoneNumber")}
+          {...formik.getFieldProps("phoneNumber")}
         />
-        {formik.errors.phoneNumber && formik.touched.phoneNumber && <div className="error">{formik.errors.phoneNumber}</div>}      
+        {formik.errors.phoneNumber && formik.touched.phoneNumber && (
+          <div className="error">{formik.errors.phoneNumber}</div>
+        )}
       </div>
       <div>
-        <label>Password</label>
+        <label htmlFor="password">Password</label>
         <input
-          type="text"
+          id="password"
+          type="password"
           name="password"
-         {...formik.getFieldProps("password")}
+          {...formik.getFieldProps("password")}
         />
-        {formik.errors.password && formik.touched.password && <div className="error">{formik.errors.password}</div>}
+        {formik.errors.password && formik.touched.password && (
+          <div className="error">{formik.errors.password}</div>
+        )}
       </div>
       <div>
-        <label>Password Confirm</label>
+        <label htmlFor="passwordConfirmation">Password Confirm</label>
         <input
-          type="text"
+         id="passwordConfirmation"
+          type="password"
           name="passwordConfirmation"
-         {...formik.getFieldProps("passwordConfirmation")}
+          {...formik.getFieldProps("passwordConfirmation")}
         />
-        {formik.errors.passwordConfirmation && formik.touched.passwordConfirmation && <div className="error">{formik.errors.passwordConfirmation}</div>}
+        {formik.errors.passwordConfirmation &&
+          formik.touched.passwordConfirmation && (
+            <div className="error">{formik.errors.passwordConfirmation}</div>
+          )}
       </div>
-      <button type="submit" className="submitBtn">submit</button>
+      <div className="radioBtn">
+          <input
+            type="radio"
+            id="0"
+            name="gender"
+            value="0"
+            onChange={formik.handleChange}
+            checked={formik.values.gender==="0"}
+          />
+          <label htmlFor="0">Male</label>
+        
+          <input
+            type="radio"
+            id="1"
+            name="gender"
+            value="1"
+            onChange={formik.handleChange}
+            checked={formik.values.gender === "1"}
+          />
+          <label htmlFor="1">Female</label>
+        
+      </div>
+      <button
+        type="submit"
+        className={formik.isValid ? "submitActive" : "submitNotActive"}
+        disabled={!formik.isValid}
+      >
+        submit
+      </button>
     </form>
   );
 };

@@ -1,46 +1,63 @@
-*{
-    text-align: center;
+* {
+  text-align: center;
 }
-form{
-   height: 50vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    width: 20rem;
-    margin: 100px auto;
-    border: 1px solid #333;
-    padding: 40px 40px;
+form {
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 20rem;
+  margin: 100px auto;
+  border: 1px solid #333;
+  padding: 40px 40px;
 }
-form div{
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: space-between;
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  padding: 5px 10px;
+  border: 1px solid #80b;
+  border-radius: 5px;
+  outline: none;
+  width: 100%;
+  font-size: medium;
 }
-form div input {
-    padding: 5px 10px;
-    border: 1px solid #80b;
-    border-radius: 5px;
-    outline: none;
-    width: 100%;
+form div input:focus {
+  border: 2px solid #80b;
 }
-form div input:focus{
-    border: 2px solid #80b;
+form label{
+  font-size: medium;
+  display: flex;
 }
-form label , input {
-    font-size: medium;
-    display: flex;
-    align-items: center;
+.error {
+  color: red;
 }
-.error{
-    color: red;
+.submitActive {
+  font-size: larger;
+  width: 50%;
+  padding: 10px 20px;
+  background-color: rgb(137, 43, 226);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
 }
-.submitBtn{
-    font-size: larger;
-    width: 50%;
-    padding: 10px 20px;
-    background-color: rgba(137, 43, 226, 0.678);
-    color: white;
-    border: none;
-    border-radius: 5px;
+.submitNotActive {
+  font-size: larger;
+  width: 50%;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: rgba(189, 171, 171, 0.664);
+  color: white;
+  cursor: not-allowed;
+}
+.radioBtn {
+  display: inline-flex;
+  align-items: center;
+}
+input + label {
+    margin-left: 5px;
+    margin-right: 20px;
+    font-weight: bold;
+    margin-top: 5px;
 }
