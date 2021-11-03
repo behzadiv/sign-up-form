@@ -1,6 +1,6 @@
 import { useState } from "react";
 import "../App.css";
-import { useFormik } from "formik";
+import { FormikConsumer, useFormik } from "formik";
 
 const initialValues ={
      name:"",
@@ -23,7 +23,7 @@ const SignUpForm = () => {
     onSubmit,
     validate
   });
-  console.log(formik.errors);
+  console.log("viseted fields",formik.touched);
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -31,30 +31,33 @@ const SignUpForm = () => {
         <input
           type="text"
           name="name"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.name}
         />
-        {formik.errors.name && <div className="error">{formik.errors.name}</div>}
+        {formik.errors.name && formik.touched.name && <div className="error">{formik.errors.name}</div>}
         </div>
       <div>
         <label>Email</label>
         <input
           type="text"
           name="email"
+          onBlur={formik.handleBlur}
           onChange={formik.handleChange}
           value={formik.values.email}
         />
-        {formik.errors.email && <div className="error">{formik.errors.email}</div>}      
+        {formik.errors.email && formik.touched.email && <div className="error">{formik.errors.email}</div>}      
       </div>
       <div>
         <label>Password</label>
         <input
           type="text"
           name="password"
+          onBlur={formik.handleBlur}
          onChange={formik.handleChange}
           value={formik.values.password}
         />
-        {formik.errors.password && <div className="error">{formik.errors.password}</div>}
+        {formik.errors.password && formik.touched.password && <div className="error">{formik.errors.password}</div>}
       </div>
       <button type="submit" className="submitBtn">submit</button>
     </form>
