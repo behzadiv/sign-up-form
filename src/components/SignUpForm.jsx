@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import axios from "axios";
 import Input from "../common/Input";
+import RadioButton from "../common/RadioInput";
 
 const initialValues = {
   name: "",
@@ -37,6 +38,10 @@ const validationSchema = Yup.object({
 
 const SignUpForm = () => {
   const[formData,setFormData]=useState(null)
+  const radioOption=[
+    {label:"Male",value:"0"},
+    {label:"Female",value:"1"}
+  ]
   const onSubmit = (values) => {
     ///post data
   };
@@ -58,32 +63,11 @@ const SignUpForm = () => {
     <form onSubmit={formik.handleSubmit}>
       <Input  name="name" label="Name" formik={formik}/>
       <Input  name="email" label="Email" formik={formik}/>
-      <Input  name="phoneNumber" label="phoneNumber" formik={formik}/>
+      <Input  name="phoneNumber" label="PhoneNumber" formik={formik}/>
       <Input  name="password" label="Password" type="password" formik={formik}/>
-      <Input  name="passwordConfirmation" label="password confirm" type="password" formik={formik}/>
+      <Input  name="passwordConfirmation" label="Password confirm" type="password" formik={formik}/>
       
-      <div className="radioBtn">
-          <input
-            type="radio"
-            id="0"
-            name="gender"
-            value="0"
-            onChange={formik.handleChange}
-            checked={formik.values.gender==="0"}
-          />
-          <label htmlFor="0">Male</label>
-        
-          <input
-            type="radio"
-            id="1"
-            name="gender"
-            value="1"
-            onChange={formik.handleChange}
-            checked={formik.values.gender === "1"}
-          />
-          <label htmlFor="1">Female</label>
-        
-      </div>
+      <RadioButton formik={formik} name="gender" radioOption={radioOption}/>
       <button
         type="submit"
         className={formik.isValid ? "submitActive" : "submitNotActive"}

@@ -52,12 +52,12 @@ form label{
   cursor: not-allowed;
 }
 .radioBtn {
-  display: inline-flex;
+  display: flex;
   align-items: center;
+  margin-top: 5px;
 }
 input + label {
     margin-left: 5px;
     margin-right: 20px;
     font-weight: bold;
-    margin-top: 5px;
 }
