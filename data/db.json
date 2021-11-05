@@ -8,7 +8,8 @@
       "phoneNumber": "09128427710",
       "password":"Behzad@123",
       "passwordConfirmation":"Behzad@123",
-      "gender":"0"
+      "gender":"0",
+      "nationality":"US"
     }
   ]
 }

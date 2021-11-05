@@ -5,6 +5,7 @@ import * as Yup from "yup";
 import axios from "axios";
 import Input from "../common/Input";
 import RadioButton from "../common/RadioInput";
+import SelectComponent from "../common/SelectComponent";
 
 const initialValues = {
   name: "",
@@ -12,7 +13,8 @@ const initialValues = {
   phoneNumber: "",
   password: "",
   passwordConfirmation: "",
-  gender:"0"
+  gender:"0",
+  nationality:""
 };
 //
 const validationSchema = Yup.object({
@@ -33,7 +35,8 @@ const validationSchema = Yup.object({
     [Yup.ref("password"), null],
     "Passwords must match"
   ),
-  gender:Yup.string().required("Gender must be selected")
+  gender:Yup.string().required("Gender must be selected"),
+  nationality:Yup.string().required("Select Your Nationality!")
 });
 
 const SignUpForm = () => {
@@ -41,6 +44,12 @@ const SignUpForm = () => {
   const radioOption=[
     {label:"Male",value:"0"},
     {label:"Female",value:"1"}
+  ]
+  const selectOptions = [
+    {label:"Select nationality",value:""},
+    {label:"Iran",value:"IR"},
+    {label:"Germany",value:"GER"},
+    {label:"USA",value:"US"},
   ]
   const onSubmit = (values) => {
     ///post data
@@ -68,12 +77,13 @@ const SignUpForm = () => {
       <Input  name="passwordConfirmation" label="Password confirm" type="password" formik={formik}/>
       
       <RadioButton formik={formik} name="gender" radioOption={radioOption}/>
+      <SelectComponent selectOptions={selectOptions} name="nationality" formik={formik}/>
       <button
         type="submit"
         className={formik.isValid ? "submitActive" : "submitNotActive"}
         disabled={!formik.isValid}
       >
-        submit
+        Submit
       </button>
     </form>
   );
