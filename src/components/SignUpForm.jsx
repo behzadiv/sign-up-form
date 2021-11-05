@@ -6,15 +6,17 @@ import axios from "axios";
 import Input from "../common/Input";
 import RadioButton from "../common/RadioInput";
 import SelectComponent from "../common/SelectComponent";
-
+import CheckboxInput from "../common/CheckboxInput";
 const initialValues = {
   name: "",
   email: "",
   phoneNumber: "",
   password: "",
   passwordConfirmation: "",
-  gender:"0",
-  nationality:""
+  gender: "0",
+  nationality: "",
+  skills: [],
+  term: false,
 };
 //
 const validationSchema = Yup.object({
@@ -35,49 +37,71 @@ const validationSchema = Yup.object({
     [Yup.ref("password"), null],
     "Passwords must match"
   ),
-  gender:Yup.string().required("Gender must be selected"),
-  nationality:Yup.string().required("Select Your Nationality!")
+  gender: Yup.string().required("Gender must be selected"),
+  nationality: Yup.string().required("Select Your Nationality!"),
+  skills: Yup.array().min(1).required("Select one at least"),
+  term: Yup.boolean().required().oneOf([true],"Accept terms"),
 });
 
 const SignUpForm = () => {
-  const[formData,setFormData]=useState(null)
-  const radioOption=[
-    {label:"Male",value:"0"},
-    {label:"Female",value:"1"}
-  ]
+  const [formData, setFormData] = useState(null);
+  const radioOption = [
+    { label: "Male", value: "0" },
+    { label: "Female", value: "1" },
+  ];
   const selectOptions = [
-    {label:"Select nationality",value:""},
-    {label:"Iran",value:"IR"},
-    {label:"Germany",value:"GER"},
-    {label:"USA",value:"US"},
-  ]
+    { label: "Select nationality", value: "" },
+    { label: "Iran", value: "IR" },
+    { label: "Germany", value: "GER" },
+    { label: "USA", value: "US" },
+  ];
+  const checkboxOptions = [
+    { label: "HTML", value: "html" },
+    { label: "CSS", value: "css" },
+    { label: "REACT", value: "react" },
+  ];
   const onSubmit = (values) => {
-    ///post data
+    //console.log(values)
   };
-  useEffect(()=>{
-    axios.get("http://localhost:3002/users/1")
-    .then(res=>  setFormData(res.data))
-    .catch()
-   
-  },[])
+  useEffect(() => {
+    axios
+      .get("http://localhost:3002/users/1")
+      .then((res) => setFormData(res.data))
+      .catch();
+  }, []);
   const formik = useFormik({
-    initialValues:formData || initialValues,
+    initialValues: formData || initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
-    enableReinitialize:true,
+    enableReinitialize: true,
   });
-  //console.log(formik.values);
+  console.log(formik.touched);
   return (
     <form onSubmit={formik.handleSubmit}>
-      <Input  name="name" label="Name" formik={formik}/>
-      <Input  name="email" label="Email" formik={formik}/>
-      <Input  name="phoneNumber" label="PhoneNumber" formik={formik}/>
-      <Input  name="password" label="Password" type="password" formik={formik}/>
-      <Input  name="passwordConfirmation" label="Password confirm" type="password" formik={formik}/>
+      <Input name="name" label="Name" formik={formik} />
+      <Input name="email" label="Email" formik={formik} />
+      <Input name="phoneNumber" label="PhoneNumber" formik={formik} />
+      <Input name="password" label="Password" type="password" formik={formik} />
+      <Input
+        name="passwordConfirmation"
+        label="Password confirm"
+        type="password"
+        formik={formik}
+      />
+
+      <RadioButton formik={formik} name="gender" radioOption={radioOption} />
+      <SelectComponent
+        selectOptions={selectOptions}
+        name="nationality"
+        formik={formik}
+      />
+      <CheckboxInput
+        formik={formik}
+        name="skills"
+        checkboxOptions={checkboxOptions}
+      />
       
-      <RadioButton formik={formik} name="gender" radioOption={radioOption}/>
-      <SelectComponent selectOptions={selectOptions} name="nationality" formik={formik}/>
       <button
         type="submit"
         className={formik.isValid ? "submitActive" : "submitNotActive"}
