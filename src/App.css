@@ -2,7 +2,7 @@
   text-align: center;
 }
 form {
-  height: 55vh;
+  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -14,7 +14,8 @@ form {
 
 input[type="text"],
 input[type="email"],
-input[type="password"],select{
+input[type="password"],select
+{
   padding: 8px 0px;
   border: 1px solid #80b;
   background-color: rgb(247, 240, 250);
@@ -50,10 +51,11 @@ form label{
   padding: 10px 20px;
   border-radius: 5px;
   background-color: rgba(189, 171, 171, 0.664);
+  border: none;
   color: white;
   cursor: not-allowed;
 }
-.radioBtn {
+.radioBtn ,.checkBox,.term{
   display: flex;
   align-items: center;
   margin-top: 5px;

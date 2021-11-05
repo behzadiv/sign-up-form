@@ -7,6 +7,7 @@ import Input from "../common/Input";
 import RadioButton from "../common/RadioInput";
 import SelectComponent from "../common/SelectComponent";
 import CheckboxInput from "../common/CheckboxInput";
+import AcceptTermCheckbox from "../common/AcceptTermCheckbox"
 const initialValues = {
   name: "",
   email: "",
@@ -101,7 +102,7 @@ const SignUpForm = () => {
         name="skills"
         checkboxOptions={checkboxOptions}
       />
-      
+      <AcceptTermCheckbox formik={formik} name="term"/>
       <button
         type="submit"
         className={formik.isValid ? "submitActive" : "submitNotActive"}
