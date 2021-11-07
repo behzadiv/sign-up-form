@@ -2,7 +2,9 @@ import React from 'react';
 
 const CheckboxInput = ({ checkboxOptions, formik, name }) => {
   return (
-    <div className="checkBox">
+    <div >
+      <label>Your Skills :</label>
+      <div className="checkBox">
       {checkboxOptions.map((item) =>(
           <React.Fragment key={item.value}>
             <input
@@ -18,6 +20,7 @@ const CheckboxInput = ({ checkboxOptions, formik, name }) => {
           </React.Fragment>
         )
       )}
+      </div>
       {/* {console.log(formik)} */}
       {formik.errors[name] && formik.touched[name] && (
         <div className="error">{formik.errors[name]}</div>

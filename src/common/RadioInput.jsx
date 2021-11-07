@@ -10,7 +10,7 @@ const RadioButton = ({radioOption,name,formik}) => {
                 name={name}
                 value={item.value}
                 onChange={formik.handleChange}
-                checked={formik.values.gender === item.value}
+                checked={formik.values[name] === item.value}
               />
               <label htmlFor={item.value}>{item.label}</label>
             </React.Fragment>)

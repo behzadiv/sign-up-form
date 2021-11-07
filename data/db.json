@@ -1,15 +1,61 @@
 {
   "users": [
     {
-      
-      "id": 1,
       "name": "behzad",
       "email": "saeedi@gmail.com",
       "phoneNumber": "09128427710",
-      "password":"Behzad@123",
-      "passwordConfirmation":"Behzad@123",
-      "gender":"0",
-      "nationality":"US"
+      "password": "Zahra@123",
+      "passwordConfirmation": "Zahra@123",
+      "gender": "0",
+      "nationality": "IR",
+      "skills": [
+        "css"
+      ],
+      "term": true,
+      "id": 1
+    },
+    {
+      "name": "behazs",
+      "email": "bas@yahoo.com",
+      "phoneNumber": "09123233321",
+      "password": "Vahid@123",
+      "passwordConfirmation": "Vahid@123",
+      "gender": "0",
+      "nationality": "IR",
+      "skills": [
+        "css",
+        "react"
+      ],
+      "term": true,
+      "id": 2
+    },
+    {
+      "name": "Alijafari",
+      "email": "Ali@yahoo.com",
+      "phoneNumber": "09123212233",
+      "password": "Ali@12345",
+      "passwordConfirmation": "Ali@12345",
+      "gender": "0",
+      "nationality": "US",
+      "skills": [
+        "react"
+      ],
+      "term": true,
+      "id": 3
+    },
+    {
+      "name": "sajjad",
+      "email": "saeedi@gmail.com",
+      "phoneNumber": "09123457767",
+      "password": "Sajjad@123",
+      "passwordConfirmation": "Sajjad@123",
+      "gender": "0",
+      "nationality": "IR",
+      "skills": [
+        "html"
+      ],
+      "term": true,
+      "id": 4
     }
   ]
 }

@@ -2,14 +2,16 @@
   text-align: center;
 }
 form {
-  height: 70vh;
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  width: 20rem;
-  margin: 100px auto;
+  width: 25rem;
+  margin:100px auto;
   border: 1px solid #333;
+  border-top: none;
   padding: 40px 40px;
+  background-color: white;
+  position: relative;
 }
 
 input[type="text"],
@@ -17,8 +19,8 @@ input[type="email"],
 input[type="password"],select
 {
   padding: 8px 0px;
-  border: 1px solid #80b;
-  background-color: rgb(247, 240, 250);
+  border: 1px solid rgba(179, 136, 136, 0.445);
+  background-color: white;
   border-radius: 5px;
   outline: none;
   width: 100%;
@@ -26,14 +28,17 @@ input[type="password"],select
   margin:8px 0px ;
 }
 form div input:focus {
-  border: 2px solid #80b;
+  border: 2px solid rgba(179, 136, 136, 0.699);
 }
 form label{
-  font-size: medium;
+  color: rgba(105, 97, 97, 0.986);
+  font-size: small;
   display: flex;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 .error {
   color: red;
+  margin: 5px 0 0  5px ;
 }
 .submitActive {
   font-size: larger;
@@ -44,6 +49,7 @@ form label{
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  margin-top: 30px;
 }
 .submitNotActive {
   font-size: larger;
@@ -54,14 +60,65 @@ form label{
   border: none;
   color: white;
   cursor: not-allowed;
+  margin-top: 20px;
 }
 .radioBtn ,.checkBox,.term{
   display: flex;
   align-items: center;
-  margin-top: 5px;
+  margin-top: 10px;
 }
 input + label {
     margin-left: 5px;
     margin-right: 20px;
     font-weight: bold;
+}
+
+p{
+  height: 5vh;
+  position: absolute;
+  top: -50px;
+  left: -1px;
+  background-color: rgba(96, 8, 238, 0.219);
+  width: 100%;
+  display: flex;
+  align-items: center;
+  height: 70px;
+  border: 1px solid rgb(38, 44, 134);
+  border-bottom: none;
+  outline: none;
+  border-radius: 2px 20px 0 0;
+  justify-content: space-between;
+}
+p h1{
+  color: rgb(255, 255, 255);
+  font-family:Helvetica;
+  margin-left: 40px;
+}
+img{
+  width: 80px;
+  height: 210px;  
+}
+
+section{
+  border: none;
+  width: 90%;
+  background-color: rgba(179, 174, 179, 0.308);
+  padding:20px;
+}
+form>label{
+  font-size:x-large;
+  font-family: Haettenschweiler;
+  color:rgb(29, 10, 199);
+  margin:5px 0;
+}
+
+label a {
+  margin: 0 5px;
+}
+
+@media only screen and (max-width:600px){
+  form{
+    width:15rem;
+    
+  }
 }

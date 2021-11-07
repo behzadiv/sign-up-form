@@ -9,6 +9,11 @@ import SelectComponent from "../common/SelectComponent";
 import CheckboxInput from "../common/CheckboxInput";
 import AcceptTermCheckbox from "../common/AcceptTermCheckbox";
 import { toast } from "react-toastify";
+import signUpMale from "../icons/signupMale.svg"
+import signUpFemale from "../icons/signupFemale.svg"
+import ReactDOM from 'react-dom'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faTimes } from '@fortawesome/free-solid-svg-icons'
 const initialValues = {
   name: "",
   email: "",
@@ -23,14 +28,14 @@ const initialValues = {
 //
 const validationSchema = Yup.object({
   name: Yup.string()
-    .required("Name is Required")
+    .required(<FontAwesomeIcon icon={faTimes}/>)
     .min(6, "Enter at least 6 char"),
-  email: Yup.string().email("Invalid Email").required("Email is Required"),
+  email: Yup.string().email("Invalid Email").required(<FontAwesomeIcon icon={faTimes}/>),
   phoneNumber: Yup.string()
-    .required("Phone Number is Required ")
+    .required(<FontAwesomeIcon icon={faTimes}/>)
     .matches(/^[0-9]{11}$/, "Invalid Phone Number"),
   password: Yup.string()
-    .required("Password is Required")
+    .required(<FontAwesomeIcon icon={faTimes}/>)
     .matches(
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
@@ -98,10 +103,25 @@ const SignUpForm = () => {
   });
   console.log(formik.touched);
   return (
+    
     <form onSubmit={formik.handleSubmit}>
+      <p><h1>Sign Up </h1><img src={formik.values.gender === "0" ? signUpMale : signUpFemale } alt=""/> </p>
+      <label>Account Details :</label>
+      <section>
       <Input name="name" label="Name" formik={formik} />
-      <Input name="email" label="Email" formik={formik} />
       <Input name="phoneNumber" label="PhoneNumber" formik={formik} />
+      <SelectComponent
+        selectOptions={selectOptions}
+        name="nationality"
+        formik={formik}
+      />
+      <RadioButton formik={formik} name="gender" radioOption={radioOption} />
+
+      </section>
+       <label>Enter Registration Details :</label>
+      <section>
+
+      <Input name="email" label="Email" formik={formik} />
       <Input name="password" label="Password" type="password" formik={formik} />
       <Input
         name="passwordConfirmation"
@@ -109,18 +129,15 @@ const SignUpForm = () => {
         type="password"
         formik={formik}
       />
-
-      <RadioButton formik={formik} name="gender" radioOption={radioOption} />
-      <SelectComponent
-        selectOptions={selectOptions}
-        name="nationality"
-        formik={formik}
-      />
+      </section>
+      <label> Skills :</label>
+      <section>
       <CheckboxInput
         formik={formik}
         name="skills"
         checkboxOptions={checkboxOptions}
       />
+      </section>
       <AcceptTermCheckbox formik={formik} name="term" />
       <button
         type="submit"
@@ -130,6 +147,7 @@ const SignUpForm = () => {
         Submit
       </button>
     </form>
+    
   );
 };
 
