@@ -61,17 +61,32 @@ const SignUpForm = () => {
     { label: "CSS", value: "css" },
     { label: "REACT", value: "react" },
   ];
-  const onSubmit = (values) => {
+  const onSubmit = (values,actions) => {
     //console.log(values)
+    axios.post("http://localhost:3003/users/",values)
+    .then(()=>actions.resetForm({
+      name: "",
+      email: "",
+      phoneNumber: "",
+      password: "",
+      passwordConfirmation: "",
+      gender: "0",
+      nationality: "",
+      skills: [],
+      term: false,
+    }) )
+    .catch(err=>console.log(err))
+    
   };
   useEffect(() => {
-    axios
-      .get("http://localhost:3002/users/1")
-      .then((res) => setFormData(res.data))
-      .catch();
+    // axios
+    //   .get("http://localhost:3002/users/1")
+    //   .then((res) => setFormData(res.data))
+    //   .catch();
+    console.log("ok");
   }, []);
   const formik = useFormik({
-    initialValues: formData || initialValues,
+    initialValues: initialValues,
     onSubmit,
     validationSchema,
     validateOnMount: true,
