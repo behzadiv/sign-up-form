@@ -7,7 +7,8 @@ import Input from "../common/Input";
 import RadioButton from "../common/RadioInput";
 import SelectComponent from "../common/SelectComponent";
 import CheckboxInput from "../common/CheckboxInput";
-import AcceptTermCheckbox from "../common/AcceptTermCheckbox"
+import AcceptTermCheckbox from "../common/AcceptTermCheckbox";
+import { toast } from "react-toastify";
 const initialValues = {
   name: "",
   email: "",
@@ -41,7 +42,7 @@ const validationSchema = Yup.object({
   gender: Yup.string().required("Gender must be selected"),
   nationality: Yup.string().required("Select Your Nationality!"),
   skills: Yup.array().min(1).required("Select one at least"),
-  term: Yup.boolean().required().oneOf([true],"Accept terms"),
+  term: Yup.boolean().required().oneOf([true], "Accept terms"),
 });
 
 const SignUpForm = () => {
@@ -61,22 +62,25 @@ const SignUpForm = () => {
     { label: "CSS", value: "css" },
     { label: "REACT", value: "react" },
   ];
-  const onSubmit = (values,actions) => {
+  const onSubmit = (values, actions) => {
     //console.log(values)
-    axios.post("http://localhost:3003/users/",values)
-    .then(()=>actions.resetForm({
-      name: "",
-      email: "",
-      phoneNumber: "",
-      password: "",
-      passwordConfirmation: "",
-      gender: "0",
-      nationality: "",
-      skills: [],
-      term: false,
-    }) )
-    .catch(err=>console.log(err))
-    
+    axios
+      .post("http://localhost:3003/users/", values)
+      .then(() =>
+        {actions.resetForm({
+          name: "",
+          email: "",
+          phoneNumber: "",
+          password: "",
+          passwordConfirmation: "",
+          gender: "0",
+          nationality: "",
+          skills: [],
+          term: false,
+        }
+        )
+        toast.success("Your signUp is complete")})
+      .catch((err) => console.log(err));
   };
   useEffect(() => {
     // axios
@@ -117,7 +121,7 @@ const SignUpForm = () => {
         name="skills"
         checkboxOptions={checkboxOptions}
       />
-      <AcceptTermCheckbox formik={formik} name="term"/>
+      <AcceptTermCheckbox formik={formik} name="term" />
       <button
         type="submit"
         className={formik.isValid ? "submitActive" : "submitNotActive"}
