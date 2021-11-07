@@ -40,7 +40,7 @@ const validationSchema = Yup.object({
       /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#\$%\^&\*])(?=.{8,})/,
       "Must Contain 8 Characters, One Uppercase, One Lowercase, One Number and One Special Case Character"
     ),
-  passwordConfirmation: Yup.string().oneOf(
+  passwordConfirmation: Yup.string().required(<FontAwesomeIcon icon={faTimes}/>).oneOf(
     [Yup.ref("password"), null],
     "Passwords must match"
   ),

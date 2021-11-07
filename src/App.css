@@ -70,7 +70,7 @@ form label{
 input + label {
     margin-left: 5px;
     margin-right: 20px;
-    font-weight: bold;
+    
 }
 
 p{
@@ -101,14 +101,15 @@ img{
 
 section{
   border: none;
+  border-radius:0 15px 0 0;
   width: 90%;
   background-color: rgba(179, 174, 179, 0.308);
   padding:20px;
 }
 form>label{
-  font-size:x-large;
-  font-family: Haettenschweiler;
-  color:rgb(29, 10, 199);
+  font-size:large;
+  font-family: 'Helvetica Neue', sans-serif;
+  color:rgba(53, 41, 168, 0.808);
   margin:5px 0;
 }
 
